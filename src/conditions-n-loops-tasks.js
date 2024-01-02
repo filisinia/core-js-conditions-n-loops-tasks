@@ -124,9 +124,6 @@ function isIsoscelesTriangle(a, b, c) {
   return false;
 }
 
-// let res = isIsoscelesTriangle(2, 3, 2);
-// console.log(res);
-
 /**
  * Converts a number to Roman numerals. The number will be between 1 and 39.
  * In this task, the use of methods of the String and Array classes is not allowed.
@@ -160,8 +157,58 @@ function convertToRomanNumerals(/* num */) {
  *  '10,5'    => 'one zero point five'
  *  '1950.2'  => 'one nine five zero point two'
  */
-function convertNumberToString(/* numberStr */) {
-  throw new Error('Not implemented');
+function convertNumberToString(numberStr) {
+  let res = '';
+
+  for (let i = 0; i < numberStr.length; i += 1) {
+    switch (numberStr[i]) {
+      case '-':
+        res += 'minus';
+        break;
+      case '+':
+        res += 'plus';
+        break;
+      case ',':
+      case '.':
+        res += 'point';
+        break;
+      case '1':
+        res += 'one';
+        break;
+      case '2':
+        res += 'two';
+        break;
+      case '3':
+        res += 'three';
+        break;
+      case '4':
+        res += 'four';
+        break;
+      case '5':
+        res += 'five';
+        break;
+      case '6':
+        res += 'six';
+        break;
+      case '7':
+        res += 'seven';
+        break;
+      case '8':
+        res += 'eight';
+        break;
+      case '9':
+        res += 'nine';
+        break;
+      case '0':
+        res += 'zero';
+        break;
+      default:
+        res += '';
+    }
+    if (numberStr.length > 1 && i !== numberStr.length - 1) res += ' ';
+  }
+
+  return res;
 }
 
 /**
