@@ -71,6 +71,23 @@ function getMaxNumber(a, b, c) {
  */
 function canQueenCaptureKing(/* queen, king */) {
   throw new Error('Not implemented');
+  // let kingPosition;
+
+  // if (king % 2 === 0) {
+  //   kingPosition = true;
+  // } else {
+  //   kingPosition = false;
+  // }
+
+  // let queenPosition;
+
+  // if (queen % 2 === 0) {
+  //   queenPosition = true;
+  // } else {
+  //   queenPosition = false;
+  // }
+
+  // return kingPosition === queenPosition;
 }
 
 /**
@@ -91,9 +108,24 @@ function canQueenCaptureKing(/* queen, king */) {
  *  2, 2, 5   => false
  *  3, 0, 3   => false
  */
-function isIsoscelesTriangle(/* a, b, c */) {
-  throw new Error('Not implemented');
+function isIsoscelesTriangle(a, b, c) {
+  if (!a || !b || !c) return false;
+
+  if (a === b && a + b > c) {
+    return true;
+  }
+  if (b === c && b + c > a) {
+    return true;
+  }
+  if (c === a && c + a > b) {
+    return true;
+  }
+
+  return false;
 }
+
+// let res = isIsoscelesTriangle(2, 3, 2);
+// console.log(res);
 
 /**
  * Converts a number to Roman numerals. The number will be between 1 and 39.
