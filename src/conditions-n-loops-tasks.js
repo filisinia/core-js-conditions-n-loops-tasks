@@ -332,10 +332,10 @@ function getBalanceIndex(/* arr */) {
  * @return {number[][]} The spiral matrix.
  *
  * @example:
- *        [
- *          [1, 2, 3],
- *  3  =>   [8, 9, 4],
- *          [7, 6, 5]
+ *        [i=1 i=2 i=3
+ *          [1, 2, 3], j = 1
+ *  3  =>   [8, 9, 4], j = 2
+ *          [7, 6, 5]  j = 3
  *        ]
  *        [
  *          [1,  2,  3,  4],
@@ -344,8 +344,46 @@ function getBalanceIndex(/* arr */) {
  *          [10, 9,  8,  7]
  *        ]
  */
-function getSpiralMatrix(/* size */) {
-  throw new Error('Not implemented');
+function getSpiralMatrix(size) {
+  const matrix = [];
+
+  for (let i = 0; i < size; i += 1) {
+    matrix[i] = [];
+  }
+
+  let value = 1;
+  let startRow = 0;
+  let endRow = size - 1;
+  let startColumn = 0;
+  let endColumn = size - 1;
+
+  while (startRow <= endRow && startColumn <= endColumn) {
+    for (let i = startColumn; i <= endColumn; i += 1) {
+      matrix[startRow][i] = value;
+      value += 1;
+    }
+    startRow += 1;
+
+    for (let i = startRow; i <= endRow; i += 1) {
+      matrix[i][endColumn] = value;
+      value += 1;
+    }
+    endColumn -= 1;
+
+    for (let i = endColumn; i >= startColumn; i -= 1) {
+      matrix[endRow][i] = value;
+      value += 1;
+    }
+    endRow -= 1;
+
+    for (let i = endRow; i >= startRow; i -= 1) {
+      matrix[i][startColumn] = value;
+      value += 1;
+    }
+    startColumn += 1;
+  }
+
+  return matrix;
 }
 
 /**
