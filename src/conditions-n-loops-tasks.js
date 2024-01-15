@@ -499,8 +499,6 @@ function shuffleChar(str, iterations) {
   return res;
 }
 
-// console.log(shuffleChar('qwerty', 2));
-
 /**
  * Returns the nearest largest integer consisting of the digits of the given positive integer.
  * If there is no such number, it returns the original number.
@@ -518,8 +516,74 @@ function shuffleChar(str, iterations) {
  * @param {number} number The source number
  * @returns {number} The nearest larger number, or original number if none exists.
  */
-function getNearestBigger(/* number */) {
-  throw new Error('Not implemented');
+function getNearestBigger(number) {
+  let smallest;
+  let indexSmallest;
+  const strOfDigits = String(number);
+
+  for (let i = strOfDigits.length - 1; i >= 1; i -= 1) {
+    if (strOfDigits[i] > strOfDigits[i - 1]) {
+      smallest = strOfDigits[i - 1];
+      indexSmallest = i - 1;
+      break;
+    }
+  }
+
+  let biggerSmallest;
+  let indexBiggerSmallest;
+
+  for (let i = strOfDigits.length - 1; i > indexSmallest; i -= 1) {
+    if (
+      (!biggerSmallest && strOfDigits[i] > smallest) ||
+      strOfDigits[i] < biggerSmallest
+    ) {
+      biggerSmallest = strOfDigits[i];
+      indexBiggerSmallest = i;
+    }
+  }
+
+  let mixedStrOfDigits = '';
+
+  for (let i = 0; i < strOfDigits.length; i += 1) {
+    if (i === indexSmallest) {
+      mixedStrOfDigits += strOfDigits[indexBiggerSmallest];
+    } else if (i === indexBiggerSmallest) {
+      mixedStrOfDigits += strOfDigits[indexSmallest];
+    } else {
+      mixedStrOfDigits += strOfDigits[i];
+    }
+  }
+
+  let strToSort = '';
+
+  for (let i = indexSmallest + 1; i < mixedStrOfDigits.length; i += 1) {
+    strToSort += mixedStrOfDigits[i];
+  }
+
+  function quickSort(str) {
+    if (str.length <= 1) return str;
+
+    const pivot = str[0];
+    let left = '';
+    let right = '';
+
+    for (let i = 1; i < str.length; i += 1) {
+      if (str[i] < pivot) {
+        left += str[i];
+      } else {
+        right += str[i];
+      }
+    }
+
+    return quickSort(left) + pivot + quickSort(right);
+  }
+
+  let firstPart = '';
+
+  for (let i = 0; i <= indexSmallest; i += 1) {
+    firstPart += mixedStrOfDigits[i];
+  }
+  return Number(firstPart + quickSort(strToSort));
 }
 
 module.exports = {
